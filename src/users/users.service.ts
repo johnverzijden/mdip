@@ -28,9 +28,10 @@ export class UsersService {
     }
 
     async update(id: number, data: Partial<UserEntity>) {
+        console.log(data)
         const user = await this.findOne(id);
         if (!user) {
-            throw new Error(`User with id {id} not found`)
+            throw new Error(`User with id not found`)
         }
 
         Object.assign(user, data);
