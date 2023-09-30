@@ -17,7 +17,7 @@ import {UsersService} from "./users.service";
 import {ViewInterceptor} from "../Interceptors/serialize.interceptor";
 import {PublicViewUserDto} from "./dtos/public-view-user.dto";
 
-
+@ViewInterceptor(PublicViewUserDto)
 @Controller('auth')
 export class UsersController {
     constructor(
@@ -30,7 +30,6 @@ export class UsersController {
         await this.userService.create(body.email, body.password)
     }
 
-    @ViewInterceptor(PublicViewUserDto)
     @Get('/:id')
     async findUser(@Param('id') id: string) {
         const user = await this.userService.findOne(parseInt(id));
