@@ -7,9 +7,7 @@ import {
     Query,
     Delete,
     Patch,
-    NotFoundException,
-    UseInterceptors,
-    // ClassSerializerInterceptor
+    NotFoundException
 } from '@nestjs/common';
 import {NewUserDto} from "./dtos/new-user.dto";
 import {UserDto} from "./dtos/user.dto";
