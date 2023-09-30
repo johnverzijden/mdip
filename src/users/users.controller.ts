@@ -14,7 +14,9 @@ import {
 import {NewUserDto} from "./dtos/new-user.dto";
 import {UserDto} from "./dtos/user.dto";
 import {UsersService} from "./users.service";
-import {SerializeInterceptor} from "../Interceptors/serialize.interceptor";
+import {ViewInterceptor} from "../Interceptors/serialize.interceptor";
+import {PublicViewUserDto} from "./dtos/public-view-user.dto";
+
 
 @Controller('auth')
 export class UsersController {
@@ -28,11 +30,9 @@ export class UsersController {
         await this.userService.create(body.email, body.password)
     }
 
-    //if exclude in the user.entity: @UseInterceptors(ClassSerializerInterceptor)
-    @UseInterceptors(SerializeInterceptor)
+    @ViewInterceptor(PublicViewUserDto)
     @Get('/:id')
     async findUser(@Param('id') id: string) {
-        console.log('Handler is running')
         const user = await this.userService.findOne(parseInt(id));
         if (!user) {
             throw new NotFoundException('User not found')
